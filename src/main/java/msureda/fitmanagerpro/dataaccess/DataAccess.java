@@ -37,7 +37,7 @@ public class DataAccess {
             
             if (result.next()) {
                 String storedHash = result.getString("PasswordHash");
-                BCrypt.Result bcryptResult = BCrypt.verifyer().verify(password.toCharArray(), storedHash);
+                BCrypt.Result  bcryptResult = BCrypt.verifyer().verify(password.toCharArray(), storedHash);
                 if (bcryptResult.verified) {
                     User user = new User();
                     user.setId(result.getInt("Id"));
