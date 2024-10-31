@@ -33,26 +33,23 @@ public class DataAccess {
         
         String sql = "SELECT * FROM Usuaris";
         
-        Connection conn = getConnection();
-        
-        PreparedStatement statement = conn.prepareStatement(sql);
-        ResultSet result = statement.executeQuery();
-        
-        while (result.next()) {
-            User user = new User();
+        try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
+            ResultSet result = statement.executeQuery();
             
-            user.setId(result.getInt("Id"));
-            user.setName(result.getString("Nom"));
-            user.setEmail(result.getString("Email"));
-            user.setPasswordHash(result.getString("PasswordHash"));
-            //user.setPhoto(result.getBytes("Foto"));
-            user.setInstructor(result.getBoolean("Instructor"));
-
-            users.add(user);
+            while (result.next()) {
+                User user = new User();
+                
+                user.setId(result.getInt("Id"));
+                user.setName(result.getString("Nom"));
+                user.setEmail(result.getString("Email"));
+                user.setPasswordHash(result.getString("PasswordHash"));
+                //user.setPhoto(result.getBytes("Foto"));
+                user.setInstructor(result.getBoolean("Instructor"));
+                
+                users.add(user);
+            }
+            
         }
-        
-        statement.close();
-        conn.close();
         
         return users;
     }
