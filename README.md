@@ -17,6 +17,9 @@ Este proyecto consiste en una aplicación de escritorio desarrollada con Java Sw
 - **Panel de usuario**: Al seleccionar un usuario, se accede a un panel donde se visualizan los entrenamientos de ese usuario y se pueden agregar o editar.
 - **Diálogo de gestión de entrenamientos**: Este diálogo permite la creación y edición de los entrenamientos, con campos como la fecha, hora, comentarios y ejercicios.
 
+### Funcionalidades adicionales
+- **Botón de registro**: Los instructores que tengan la aplicación, ahora pueden registrarse.
+
 ## Requisitos
 
 - **Java 8 o superior**: Asegúrate de tener Java instalado en tu máquina.
