@@ -28,7 +28,8 @@ public class MainPanel extends javax.swing.JPanel {
         
         // Configuración de estilos básica
         StyleUtils.stylePanel(this);
-        StyleUtils.styleButton(loginAccessButton);
+        StyleUtils.styleButton(loginAccessButton, StyleUtils.ButtonStyle.PRIMARY);
+        StyleUtils.styleButton(registerAccessButton,StyleUtils.ButtonStyle.SECONDARY);
         setLayout(new GridBagLayout());
         
         // Estructuración principal y logo
@@ -63,15 +64,19 @@ public class MainPanel extends javax.swing.JPanel {
             }
         });
         
-        //Estructuración del título, login y enlace
+        //Estructuración del título, login, register y enlace
         gbc.gridy = 1;
         add(titleLabel, gbc);
         
         gbc.gridy = 2;
-        gbc.insets = new Insets(120, 10, 10, 10);
+        gbc.insets = new Insets(80, 10, 10, 10);
         add(loginAccessButton, gbc);
 
         gbc.gridy = 3;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        add(registerAccessButton, gbc);
+
+        gbc.gridy = 4;
         gbc.insets = new Insets(40, 10, 10, 10);
         add(linkLabel, gbc);
         
@@ -83,12 +88,24 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        registerAccessButton = new javax.swing.JButton();
         loginAccessButton = new javax.swing.JButton();
         logoLabel = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(60, 63, 65));
         setPreferredSize(new java.awt.Dimension(290, 277));
         setLayout(null);
+
+        registerAccessButton.setText("Registrarse");
+        registerAccessButton.setToolTipText("");
+        registerAccessButton.setActionCommand("LoginAccess");
+        registerAccessButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerAccessButtonActionPerformed(evt);
+            }
+        });
+        add(registerAccessButton);
+        registerAccessButton.setBounds(90, 260, 110, 23);
 
         loginAccessButton.setText("Acceder");
         loginAccessButton.setActionCommand("LoginAccess");
@@ -124,9 +141,22 @@ public class MainPanel extends javax.swing.JPanel {
         main.showHomePanel();
     }//GEN-LAST:event_loginAccessButtonActionPerformed
 
+    private void registerAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAccessButtonActionPerformed
+        RegisterDialog registerDialog = new RegisterDialog(main, main);
+        registerDialog.setLocationRelativeTo(main);
+        registerDialog.setVisible(true);
+        
+        User registeredUser = registerDialog.getRegisteredUser();
+        if (registeredUser != null) {
+            main.setInstructor(registeredUser);
+            main.showHomePanel();
+        }
+    }//GEN-LAST:event_registerAccessButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton loginAccessButton;
     private javax.swing.JLabel logoLabel;
+    private javax.swing.JButton registerAccessButton;
     // End of variables declaration//GEN-END:variables
 }
