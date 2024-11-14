@@ -29,19 +29,19 @@ public class DataAccess {
         return connection;
     }
 
-    public static User getUserByEmail(String email) throws SQLException {
-        String sql = "SELECT * FROM Usuaris WHERE Email = ?";
+    public static User getInstructorByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM Usuaris WHERE Email = ? AND Instructor = 1";
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, email);
             ResultSet result = statement.executeQuery();
 
             if (result.next()) {
-                User user = new User();
-                user.setId(result.getInt("Id"));
-                user.setName(result.getString("Nom"));
-                user.setEmail(email);
-                user.setPasswordHash(result.getString("PasswordHash"));
-                return user;
+                User instructor = new User();
+                instructor.setId(result.getInt("Id"));
+                instructor.setName(result.getString("Nom"));
+                instructor.setEmail(email);
+                instructor.setPasswordHash(result.getString("PasswordHash"));
+                return instructor;
             }
         }
         return null;
