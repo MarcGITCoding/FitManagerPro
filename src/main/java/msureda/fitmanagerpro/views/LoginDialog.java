@@ -34,7 +34,7 @@ public class LoginDialog extends JDialog {
         StyleUtils.styleLabel(passwordLabel);
         StyleUtils.styleTextField(emailField);
         StyleUtils.stylePasswordField(passwordField);
-        StyleUtils.styleButton(loginButton);
+        StyleUtils.styleButton(loginButton, StyleUtils.ButtonStyle.PRIMARY);
 
         // Estructuración de componentes
         GridBagConstraints gbc = new GridBagConstraints();

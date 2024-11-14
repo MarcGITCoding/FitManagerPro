@@ -60,7 +60,7 @@ public class UserPanel extends javax.swing.JPanel {
 
         // Botón de añadir workout
         addWorkoutButton = new JButton("Añadir Workout");
-        StyleUtils.styleButton(addWorkoutButton);
+        StyleUtils.styleButton(addWorkoutButton, StyleUtils.ButtonStyle.PRIMARY);
         addWorkoutButton.addActionListener(this::addWorkoutAction);
 
         // Panel superior para la flecha de regreso y el botón de añadir workout

@@ -45,7 +45,7 @@ public class HomePanel extends javax.swing.JPanel {
         welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 
         logoutButton.setText("Cerrar Sesión");
-        StyleUtils.styleButton(logoutButton);
+        StyleUtils.styleButton(logoutButton, StyleUtils.ButtonStyle.PRIMARY);
 
         // Panel superior para organizar el saludo y el botón de logout
         JPanel topPanel = new JPanel(new BorderLayout());
