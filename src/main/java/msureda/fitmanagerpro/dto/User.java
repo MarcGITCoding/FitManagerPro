@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package msureda.fitmanagerpro.dto;
 
 /**
- * 
+ * Clase DTO para la tabla Usuaris
  * @author Marc Sureda
  */
 public class User {
