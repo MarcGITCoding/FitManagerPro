@@ -134,7 +134,7 @@ public class MainPanel extends javax.swing.JPanel {
         loginDialog.setLocationRelativeTo(main);
         loginDialog.setVisible(true);
 
-        User getLoggedUser = loginDialog.getAuthenticatedUser();
+        User getLoggedUser = loginDialog.getAuthenticatedInstructor();
         if (getLoggedUser == null) return;
 
         main.setInstructor(getLoggedUser);

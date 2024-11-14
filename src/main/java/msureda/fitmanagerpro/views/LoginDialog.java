@@ -18,7 +18,7 @@ import msureda.fitmanagerpro.utils.StyleUtils;
  * @author Marc Sureda
  */
 public class LoginDialog extends JDialog {
-    private User authenticatedUser = null;
+    private User authenticatedInstructor = null;
 
     public LoginDialog(JFrame parent, Main mainFrame) {
         super(mainFrame, "Login", true);
@@ -113,20 +113,20 @@ public class LoginDialog extends JDialog {
         char[] password = passwordField.getPassword();
 
         try {
-            User user = DataAccess.getUserByEmail(email);
+            User instructor = DataAccess.getInstructorByEmail(email);
             
-            if (user == null) {
+            if (instructor == null) {
                 ErrorHandler.showCustomError("El usuario no existe", this);
                 return;
             }
 
-            BCrypt.Result result = BCrypt.verifyer().verify(password, user.getPasswordHash());
+            BCrypt.Result result = BCrypt.verifyer().verify(password, instructor.getPasswordHash());
             if (!result.verified) {
                 ErrorHandler.showCustomError("Contraseña incorrecta", this);
                 return;
             }
 
-            authenticatedUser = user;
+            authenticatedInstructor = instructor;
 
             dispose();
         } catch (SQLException e) {
@@ -134,8 +134,8 @@ public class LoginDialog extends JDialog {
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    public User getAuthenticatedUser() {
-        return authenticatedUser;
+    public User getAuthenticatedInstructor() {
+        return authenticatedInstructor;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
