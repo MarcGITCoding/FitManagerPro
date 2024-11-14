@@ -13,9 +13,9 @@ import javax.swing.border.EmptyBorder;
  */
 public class StyleUtils {
     public static final Color PRIMARY_COLOR = new Color(45, 85, 255);
+    public static final Color SECONDARY_COLOR = new Color(60, 179, 113);
     public static final Color BACKGROUND_COLOR = new Color(60,63,65);
     public static final Color TEXT_COLOR = Color.WHITE;
-    public static final Border BUTTON_BORDER = BorderFactory.createLineBorder(PRIMARY_COLOR, 1, true);
 
     // Tamaños comunes
     public static final Dimension BUTTON_SIZE = new Dimension(200, 40);
@@ -23,21 +23,28 @@ public class StyleUtils {
     public static final Dimension LABEL_SIZE = new Dimension(200, 30);
     public static final Dimension LIST_SIZE = new Dimension(300, 150);
 
-    public static void styleButton(JButton button) {
+    public enum ButtonStyle {
+        PRIMARY, SECONDARY
+    }
+    
+    public static void styleButton(JButton button, ButtonStyle style) {
+        Color backgroundColor = (style == ButtonStyle.PRIMARY) ? PRIMARY_COLOR : SECONDARY_COLOR;
+        Border buttonBorder = BorderFactory.createLineBorder(backgroundColor, 1, true);
+        
         button.setPreferredSize(BUTTON_SIZE);
-        button.setBackground(PRIMARY_COLOR);
+        button.setBackground(backgroundColor);
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
-        button.setBorder(BUTTON_BORDER);
+        button.setBorder(buttonBorder);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(PRIMARY_COLOR.brighter());
+                button.setBackground(backgroundColor.brighter());
                 button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             public void mouseExited(MouseEvent e) {
-                button.setBackground(PRIMARY_COLOR);
+                button.setBackground(backgroundColor);
                 button.setCursor(Cursor.getDefaultCursor());
             }
         });
