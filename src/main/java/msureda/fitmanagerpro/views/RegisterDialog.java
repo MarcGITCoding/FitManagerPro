@@ -22,7 +22,7 @@ public class RegisterDialog extends JDialog {
     private User registeredUser = null;
 
     public RegisterDialog(JFrame parent, Main mainFrame) {
-        super(mainFrame, "Login", true);
+        super(mainFrame, "Register", true);
         initComponents();
 
         // Configuración de estilos básica
