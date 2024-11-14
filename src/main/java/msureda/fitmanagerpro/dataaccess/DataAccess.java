@@ -67,6 +67,27 @@ public class DataAccess {
 
         return users;
     }
+    
+    public static void saveUser(User user) throws SQLException {
+        String sql = "INSERT INTO Usuaris (Nom, Email, PasswordHash, Instructor) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+
+            try (PreparedStatement insertStatement = connection.prepareStatement(sql)) {
+                insertStatement.setString(1, user.getName());
+                insertStatement.setString(2, user.getEmail());
+                insertStatement.setString(3, user.getPasswordHash());
+                insertStatement.setInt(4, 1);
+                insertStatement.executeUpdate();
+
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            }
+        }
+    }
 
     public static ArrayList<Workout> getWorkoutsByUser(User user) throws SQLException {
         ArrayList<Workout> workouts = new ArrayList<>();
