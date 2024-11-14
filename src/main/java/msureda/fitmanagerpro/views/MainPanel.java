@@ -102,7 +102,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         logoLabel.setForeground(new java.awt.Color(60, 63, 65));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/newlogo.png"))); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
         logoLabel.setToolTipText("");
         logoLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         logoLabel.setMaximumSize(new java.awt.Dimension(200, 200));
