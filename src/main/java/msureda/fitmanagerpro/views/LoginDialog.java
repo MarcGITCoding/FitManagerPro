@@ -26,8 +26,8 @@ public class LoginDialog extends JDialog {
 
         // Configuración de estilos básica
         setSize(600, 250);
+        setResizable(false);
         setLayout(new GridBagLayout());
-        
         this.getContentPane().setBackground(StyleUtils.BACKGROUND_COLOR);
 
         StyleUtils.styleLabel(emailLabel);

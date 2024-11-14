@@ -50,6 +50,7 @@ public class ManageWorkoutDialog extends JDialog {
 
         // Configuración de estilos básica
         setSize(600, 500);
+        setResizable(false);
         setLayout(new GridBagLayout());
         getContentPane().setBackground(StyleUtils.BACKGROUND_COLOR);
         
