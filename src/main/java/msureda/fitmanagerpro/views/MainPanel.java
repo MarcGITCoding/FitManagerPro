@@ -1,8 +1,15 @@
 package msureda.fitmanagerpro.views;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+import javax.swing.JLabel;
 import msureda.fitmanagerpro.Main;
 import msureda.fitmanagerpro.dto.User;
 import msureda.fitmanagerpro.utils.StyleUtils;
@@ -24,17 +31,49 @@ public class MainPanel extends javax.swing.JPanel {
         StyleUtils.styleButton(loginAccessButton);
         setLayout(new GridBagLayout());
         
-        // Estructuración de componentes
+        // Estructuración principal y logo
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(10, 10, 10, 10);
-
         add(logoLabel, gbc);
 
+        // Título de la aplicación
+        JLabel titleLabel = new javax.swing.JLabel();
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("<html><span style='font-family: Helvetica, sans-serif; font-size: 34px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);'>"
+                + "<span style='color: #00BFFF;'>FIT </span>"
+                + "<span style='color: #FFFFFF;'>MANAGER </span>"
+                + "<span style='color: #1E90FF;'>PRO </span>"
+                + "</span></html>");
+        titleLabel.setFont(new java.awt.Font("Helvetica", java.awt.Font.BOLD, 64));
+        
+        // Enlace a la web
+        JLabel linkLabel = new JLabel("<html><u>Visita nuestra página web</u></html>");
+        linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        linkLabel.setForeground(Color.CYAN);
+        linkLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent ev) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.fitmanagerpro.es"));
+                } catch (Exception e) {
+                }
+            }
+        });
+        
+        //Estructuración del título, login y enlace
         gbc.gridy = 1;
+        add(titleLabel, gbc);
+        
+        gbc.gridy = 2;
+        gbc.insets = new Insets(120, 10, 10, 10);
         add(loginAccessButton, gbc);
+
+        gbc.gridy = 3;
+        gbc.insets = new Insets(40, 10, 10, 10);
+        add(linkLabel, gbc);
         
         revalidate();
         repaint();
@@ -63,14 +102,14 @@ public class MainPanel extends javax.swing.JPanel {
 
         logoLabel.setForeground(new java.awt.Color(60, 63, 65));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/newlogo.png"))); // NOI18N
         logoLabel.setToolTipText("");
         logoLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         logoLabel.setMaximumSize(new java.awt.Dimension(200, 200));
         logoLabel.setMinimumSize(new java.awt.Dimension(200, 200));
         logoLabel.setName(""); // NOI18N
         add(logoLabel);
-        logoLabel.setBounds(0, 0, 290, 260);
+        logoLabel.setBounds(0, -10, 290, 260);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAccessButtonActionPerformed
