@@ -22,7 +22,7 @@ public class DataAccess {
         Connection connection = null;
 
         String connectionString = "jdbc:sqlserver://localhost;database=simulapdb;user=sa;"
-                + "password=1234;encrypt=false;";
+                + "password=Pwd1234;encrypt=false;";
 
         connection = DriverManager.getConnection(connectionString);
 
