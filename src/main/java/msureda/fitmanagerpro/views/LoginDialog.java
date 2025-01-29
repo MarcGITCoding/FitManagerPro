@@ -2,9 +2,6 @@ package msureda.fitmanagerpro.views;
 
 import javax.swing.*;
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.sql.SQLException;
 import msureda.fitmanagerpro.Main;
 
@@ -12,6 +9,7 @@ import msureda.fitmanagerpro.dataaccess.DataAccess;
 import msureda.fitmanagerpro.dto.User;
 import msureda.fitmanagerpro.utils.ErrorHandler;
 import msureda.fitmanagerpro.utils.StyleUtils;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Diálogo modal para el login
@@ -27,7 +25,10 @@ public class LoginDialog extends JDialog {
         // Configuración de estilos básica
         setSize(600, 250);
         setResizable(false);
-        setLayout(new GridBagLayout());
+        setLayout(new MigLayout("wrap 2, alignx center, aligny center", // 2 columnas, centrado
+                "[right]10[grow,fill]", // Columna 1 alineada a la derecha, Columna 2 crece y llena
+                "[]10[]10[]10[]" // Filas con espacio entre ellas
+        ));
         this.getContentPane().setBackground(StyleUtils.BACKGROUND_COLOR);
 
         StyleUtils.styleLabel(emailLabel);
@@ -37,32 +38,16 @@ public class LoginDialog extends JDialog {
         StyleUtils.styleButton(loginButton, StyleUtils.ButtonStyle.PRIMARY);
 
         // Estructuración de componentes
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        add(emailLabel, "cell 0 0");
+        add(emailField, "cell 1 0");
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.EAST;
-        add(emailLabel, gbc);
+        add(passwordLabel, "cell 0 1");
+        add(passwordField, "cell 1 1");
 
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        add(emailField, gbc);
+        add(loginButton, "cell 0 2 2 1, alignx center, gapy 20"); // Ocupa 2 columnas, centrado
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.EAST;
-        add(passwordLabel, gbc);
-
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        add(passwordField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        add(loginButton, gbc);
+        revalidate();
+        repaint();
     }
 
     @SuppressWarnings("unchecked")

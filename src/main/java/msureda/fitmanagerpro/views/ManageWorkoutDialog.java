@@ -24,6 +24,7 @@ import msureda.fitmanagerpro.dto.User;
 import msureda.fitmanagerpro.dto.Workout;
 import msureda.fitmanagerpro.utils.ErrorHandler;
 import msureda.fitmanagerpro.utils.StyleUtils;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Diálogo modal para la gestión de workouts (añadir, editar o eliminar)
@@ -51,10 +52,13 @@ public class ManageWorkoutDialog extends JDialog {
         // Configuración de estilos básica
         setSize(600, 500);
         setResizable(false);
-        setLayout(new GridBagLayout());
+        setLayout(new MigLayout("wrap 2, alignx center, aligny center", // 2 columnas, centrado
+                "[right]10[grow,fill]", // Columna 1 alineada a la derecha, Columna 2 crece y llena
+                "[]10[]10[]10[]10[]10[]" // Filas con espacio entre ellas
+        ));
         getContentPane().setBackground(StyleUtils.BACKGROUND_COLOR);
-        
-        // Estructuración de componentes
+
+        // Spinner para la fecha
         dateSpinner = new JSpinner(new SpinnerDateModel());
         dateSpinner.setPreferredSize(new Dimension(200, 30));
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
@@ -77,21 +81,19 @@ public class ManageWorkoutDialog extends JDialog {
         } catch (SQLException e) {
             ErrorHandler.showSQLError(e, this);
         }
-        
+
         exerciseList = new JList<>(new DefaultListModel<>());
         for (Exercise exercise : allExercises) {
             ((DefaultListModel<Exercise>) exerciseList.getModel()).addElement(exercise);
         }
         exerciseList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         exerciseList.setPreferredSize(StyleUtils.LIST_SIZE);
-        /*
-            Handler para seleccionar varios items sin usar ctrl
-            https://stackoverflow.com/questions/2404546/select-multiple-items-in-jlist-without-using-the-ctrl-command-key
-        */
+
+        // Handler para seleccionar varios items sin usar ctrl
         exerciseList.setSelectionModel(new DefaultListSelectionModel() {
             @Override
             public void setSelectionInterval(int index0, int index1) {
-                if(super.isSelectedIndex(index0)) super.removeSelectionInterval(index0, index1);
+                if (super.isSelectedIndex(index0)) super.removeSelectionInterval(index0, index1);
                 else super.addSelectionInterval(index0, index1);
             }
         });
@@ -104,58 +106,38 @@ public class ManageWorkoutDialog extends JDialog {
         // Escribir datos del workout y añadir botón de eliminar (solo en modo editar)
         if (workout != null) {
             setCurrentData();
-            
+
             deleteButton = new JButton("Eliminar");
             StyleUtils.styleButton(deleteButton, StyleUtils.ButtonStyle.PRIMARY);
             deleteButton.addActionListener(this::deleteWorkout);
         }
 
-        // Layout
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        // Fecha
+        // Estructuración de componentes
         StyleUtils.styleLabel(dateLabel);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(dateLabel, gbc);
-        gbc.gridx = 1;
-        add(dateSpinner, gbc);
+        add(dateLabel, "cell 0 0");
+        add(dateSpinner, "cell 1 0");
 
-        // Hora
         StyleUtils.styleLabel(hourLabel);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(hourLabel, gbc);
-        gbc.gridx = 1;
-        add(timeSpinner, gbc);
+        add(hourLabel, "cell 0 1");
+        add(timeSpinner, "cell 1 1");
 
-        // Comentarios
         StyleUtils.styleLabel(commentsLabel);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(commentsLabel, gbc);
-        gbc.gridx = 1;
-        add(commentField, gbc);
+        add(commentsLabel, "cell 0 2");
+        add(commentField, "cell 1 2");
 
-        // Lista de ejercicios
         StyleUtils.styleLabel(exercisesLabel);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
-        add(exercisesLabel, gbc);
-        gbc.gridy = 4;
-        add(new JScrollPane(exerciseList), gbc);
+        add(exercisesLabel, "cell 0 3 2 1, alignx center"); // Ocupa 2 columnas, centrado
+        add(new JScrollPane(exerciseList), "cell 0 4 2 1, grow, h 150!"); // Altura fija de 150 píxeles
 
         // Botones
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new MigLayout("alignx center"));
         buttonPanel.setBackground(StyleUtils.BACKGROUND_COLOR);
         buttonPanel.add(saveButton);
         if (workout != null) buttonPanel.add(deleteButton);
+        add(buttonPanel, "cell 0 5 2 1, alignx center"); // Ocupa 2 columnas, centrado
 
-        gbc.gridy = 5;
-        add(buttonPanel, gbc);
+        revalidate();
+        repaint();
     }
 
     @SuppressWarnings("unchecked")

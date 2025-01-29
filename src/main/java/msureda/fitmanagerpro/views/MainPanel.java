@@ -3,17 +3,17 @@ package msureda.fitmanagerpro.views;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import msureda.fitmanagerpro.Main;
 import msureda.fitmanagerpro.dto.User;
 import msureda.fitmanagerpro.utils.StyleUtils;
 import msureda.fitmanagerpro.views.LoginDialog;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Panel prinicpal de la aplicación
@@ -25,31 +25,36 @@ public class MainPanel extends javax.swing.JPanel {
     public MainPanel(Main mainJFrame) {
         initComponents();
         main = mainJFrame;
-        
+
         // Configuración de estilos básica
         StyleUtils.stylePanel(this);
         StyleUtils.styleButton(loginAccessButton, StyleUtils.ButtonStyle.PRIMARY);
-        StyleUtils.styleButton(registerAccessButton,StyleUtils.ButtonStyle.SECONDARY);
-        setLayout(new GridBagLayout());
-        
+        StyleUtils.styleButton(registerAccessButton, StyleUtils.ButtonStyle.SECONDARY);
+
+        // Configuración del layout con MigLayout
+        setLayout(new MigLayout("wrap, alignx center, aligny center", // wrap para que los componentes se coloquen en filas, alignx y aligny para centrar
+                "[grow,fill]", // Column constraints
+                "[]10[]10[]10[]10[]" // Row constraints con espacios entre filas
+        ));
+
         // Estructuración principal y logo
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        add(logoLabel, gbc);
+        add(logoLabel, "cell 0 0, alignx center, aligny center");
 
         // Título de la aplicación
-        JLabel titleLabel = new javax.swing.JLabel();
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel();
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setText("<html><span style='font-family: Helvetica, sans-serif; font-size: 34px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);'>"
                 + "<span style='color: #00BFFF;'>FIT </span>"
                 + "<span style='color: #FFFFFF;'>MANAGER </span>"
                 + "<span style='color: #1E90FF;'>PRO </span>"
                 + "</span></html>");
-        titleLabel.setFont(new java.awt.Font("Helvetica", java.awt.Font.BOLD, 64));
-        
+        titleLabel.setFont(new Font("Helvetica", Font.BOLD, 64));
+        add(titleLabel, "cell 0 1, alignx center, aligny center");
+
+        // Botones con ancho limitado
+        add(loginAccessButton, "cell 0 2, alignx center, aligny center, w 200!, gapy 80"); // Ancho fijo de 200 píxeles
+        add(registerAccessButton, "cell 0 3, alignx center, aligny center, w 200!, gapy 10"); // Ancho fijo de 200 píxeles
+
         // Enlace a la web
         JLabel linkLabel = new JLabel("<html><u>Visita nuestra página web</u></html>");
         linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -60,26 +65,12 @@ public class MainPanel extends javax.swing.JPanel {
                 try {
                     Desktop.getDesktop().browse(new URI("https://www.fitmanagerpro.es"));
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
-        
-        //Estructuración del título, login, register y enlace
-        gbc.gridy = 1;
-        add(titleLabel, gbc);
-        
-        gbc.gridy = 2;
-        gbc.insets = new Insets(80, 10, 10, 10);
-        add(loginAccessButton, gbc);
+        add(linkLabel, "cell 0 4, alignx center, aligny center, w 153!, gapy 40");
 
-        gbc.gridy = 3;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        add(registerAccessButton, gbc);
-
-        gbc.gridy = 4;
-        gbc.insets = new Insets(40, 10, 10, 10);
-        add(linkLabel, gbc);
-        
         revalidate();
         repaint();
     }
