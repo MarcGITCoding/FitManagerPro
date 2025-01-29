@@ -30,10 +30,8 @@ public class Main extends javax.swing.JFrame {
         MainPanel pnlMain = new MainPanel(this);
         setCurrentPanel(pnlMain);
 
-        setResizable(false);
+        setResizable(true);
         
-        // Handler para hacer resize de los paneles en cambio de tamaño de ventana
-        // Para que esto funcione, el setResizable de arriba debe estar en true
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 resizeCurrentPanel();
