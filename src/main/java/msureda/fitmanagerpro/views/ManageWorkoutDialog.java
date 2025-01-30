@@ -100,7 +100,7 @@ public class ManageWorkoutDialog extends JDialog {
 
         // Botón de guardar o actualizar
         saveButton = new JButton(workout == null ? "Guardar" : "Actualizar");
-        StyleUtils.styleButton(saveButton, StyleUtils.ButtonStyle.PRIMARY);
+        StyleUtils.styleButton(saveButton, StyleUtils.ButtonStyle.SECONDARY);
         saveButton.addActionListener(this::saveWorkout);
 
         // Escribir datos del workout y añadir botón de eliminar (solo en modo editar)
@@ -108,7 +108,7 @@ public class ManageWorkoutDialog extends JDialog {
             setCurrentData();
 
             deleteButton = new JButton("Eliminar");
-            StyleUtils.styleButton(deleteButton, StyleUtils.ButtonStyle.PRIMARY);
+            StyleUtils.styleButton(deleteButton, StyleUtils.ButtonStyle.DANGER);
             deleteButton.addActionListener(this::deleteWorkout);
         }
 

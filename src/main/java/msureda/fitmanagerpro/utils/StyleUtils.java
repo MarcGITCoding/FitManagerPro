@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 public class StyleUtils {
     public static final Color PRIMARY_COLOR = new Color(45, 85, 255);
     public static final Color SECONDARY_COLOR = new Color(60, 179, 113);
+    public static final Color DANGER_COLOR = new Color(239, 68, 68);
     public static final Color BACKGROUND_COLOR = new Color(60,63,65);
     public static final Color TEXT_COLOR = Color.WHITE;
 
@@ -24,15 +25,19 @@ public class StyleUtils {
     public static final Dimension LIST_SIZE = new Dimension(300, 150);
 
     public enum ButtonStyle {
-        PRIMARY, SECONDARY
+        PRIMARY, SECONDARY, DANGER
     }
     
     public static void styleButton(JButton button, ButtonStyle style) {
-        Color backgroundColor = (style == ButtonStyle.PRIMARY) ? PRIMARY_COLOR : SECONDARY_COLOR;
-        Border buttonBorder = BorderFactory.createLineBorder(backgroundColor, 1, true);
+        Color backgroundColor = PRIMARY_COLOR;
+        if (style == ButtonStyle.SECONDARY) backgroundColor = SECONDARY_COLOR;
+        else if (style == ButtonStyle.DANGER) backgroundColor = DANGER_COLOR;
+        final Color backgroundColorCopy = backgroundColor; // Creamos copia para que no se referencie al original
+        
+        Border buttonBorder = BorderFactory.createLineBorder(backgroundColorCopy, 1, true);
         
         button.setPreferredSize(BUTTON_SIZE);
-        button.setBackground(backgroundColor);
+        button.setBackground(backgroundColorCopy);
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setBorder(buttonBorder);
@@ -40,11 +45,11 @@ public class StyleUtils {
         
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(backgroundColor.brighter());
+                button.setBackground(backgroundColorCopy.brighter());
                 button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             public void mouseExited(MouseEvent e) {
-                button.setBackground(backgroundColor);
+                button.setBackground(backgroundColorCopy);
                 button.setCursor(Cursor.getDefaultCursor());
             }
         });
