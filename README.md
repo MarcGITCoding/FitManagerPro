@@ -1,5 +1,8 @@
 # FitManagerPro
 
+> [!TIP]
+> Para obtener una lista detallada de los cambios más recientes, consulta el archivo [CHANGELOG.md](CHANGELOG.md).
+
 ## Descripción
 
 Este proyecto consiste en una aplicación de escritorio desarrollada con Java Swing que permite a los instructores gestionar los entrenamientos de sus usuarios. La aplicación permite crear, editar y eliminar entrenamientos, así como asignarles ejercicios y comentarios. La interfaz de usuario es sencilla, pero funcional, y está orientada a facilitar la administración de datos relacionados con los entrenamientos y usuarios.
@@ -11,6 +14,7 @@ Este proyecto consiste en una aplicación de escritorio desarrollada con Java Sw
 - **Editar Workout**: Permite editar un entrenamiento existente, actualizando la fecha, hora, comentarios y ejercicios.
 - **Eliminar Workout**: Permite eliminar un entrenamiento previamente creado.
 - **Visualización de Workouts**: Los entrenamientos asociados a un usuario se muestran de manera clara en la interfaz.
+- **Calendario de Workouts**: Un calendario interactivo en el panel de inicio muestra los días con entrenamientos. Al hacer clic en un día específico, se presenta una lista de entrenamientos programados para esa fecha.
 
 ### Interfaz de Usuario
 - **Pantalla de bienvenida**: Al iniciar la aplicación, los usuarios son recibidos con un panel que incluye la información del instructor y una lista de los usuarios asociados.
@@ -19,6 +23,9 @@ Este proyecto consiste en una aplicación de escritorio desarrollada con Java Sw
 
 ### Funcionalidades adicionales
 - **Botón de registro**: Los instructores que tengan la aplicación, ahora pueden registrarse.
+- **Estilos personalizables**: Se han añadido estilos a los botones, con un nuevo estilo "DANGER" para acciones críticas y advertencias.
+- **Validaciones mejoradas**: Se han mejorado las validaciones de los campos de **email** y **comentarios** de los workouts, garantizando que los datos sean correctos y coherentes.
+- **Iconos**: Se han añadido iconos gráficos a las ventanas de login, registro y al panel de gestión de entrenamientos, mejorando la experiencia visual.
 
 ## Requisitos
 
@@ -33,6 +40,9 @@ Este proyecto consiste en una aplicación de escritorio desarrollada con Java Sw
    git clone https://github.com/MarcGITCoding/FitManagerPro.git
    ```
 
+2. **Instala la dependencia adicional**:
+
+   Este proyecto depende del [WorkoutsCalendarPanel](https://github.com/MarcGITCoding/WorkoutsCalendarPanel/releases/tag/1.0.3). Asegúrate de incluir la versión 1.0.3 en tu proyecto.
 
 ## APP WORKFLOW
 ![App Workflow](https://github.com/user-attachments/assets/596e8379-caa7-4c83-98aa-94f1f1f94978)
