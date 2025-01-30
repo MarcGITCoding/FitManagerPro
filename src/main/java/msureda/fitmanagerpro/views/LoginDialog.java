@@ -3,6 +3,7 @@ package msureda.fitmanagerpro.views;
 import javax.swing.*;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 import msureda.fitmanagerpro.Main;
 
 import msureda.fitmanagerpro.dataaccess.DataAccess;
@@ -96,6 +97,18 @@ public class LoginDialog extends JDialog {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String email = emailField.getText();
         char[] password = passwordField.getPassword();
+
+        if (email.isEmpty() || password.length == 0) {
+            ErrorHandler.showCustomError("Por favor, completa todos los campos", this);
+            return;
+        }
+
+        // Validación de formato de email
+        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,4}$";
+        if (!Pattern.matches(emailRegex, email)) {
+            ErrorHandler.showCustomError("Formato de email inválido", this);
+            return;
+        }
 
         try {
             User instructor = DataAccess.getInstructorByEmail(email);

@@ -208,6 +208,11 @@ public class ManageWorkoutDialog extends JDialog {
         String comments = commentField.getText();
         ArrayList<Exercise> selectedExercises = new ArrayList<>(exerciseList.getSelectedValuesList());
 
+        if (comments.isEmpty()) {
+            ErrorHandler.showCustomError("Por favor, completa el campo de comentario", this);
+            return;
+        }
+
         LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
         LocalTime localTime = time.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
         LocalDateTime localDateTime = localDate.atTime(localTime);

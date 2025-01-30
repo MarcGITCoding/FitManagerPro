@@ -131,7 +131,7 @@ public class RegisterDialog extends JDialog {
         }
 
         // Validación de formato de email
-        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,4}$";
         if (!Pattern.matches(emailRegex, email)) {
             ErrorHandler.showCustomError("Formato de email inválido", this);
             return;
