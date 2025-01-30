@@ -127,7 +127,7 @@ public class UserPanel extends javax.swing.JPanel {
         bodyPanel.setLayout(new BorderLayout());
         bodyPanel.add(headerPanel, BorderLayout.NORTH);
         bodyPanel.add(workoutScrollPane, BorderLayout.CENTER);
-
+        
         add(topPanel, BorderLayout.NORTH);
         add(bodyPanel, BorderLayout.CENTER);
     }

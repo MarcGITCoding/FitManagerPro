@@ -60,6 +60,12 @@ public class StyleUtils {
         panel.setBorder(new EmptyBorder(10, 10, 10, 15));
     }
 
+    public static void styleTable(JTable table) {
+        table.setBackground(BACKGROUND_COLOR);
+        table.setForeground(TEXT_COLOR);
+        table.setBorder(new EmptyBorder(10, 10, 10, 15));
+    }
+
     public static void styleDialog(JDialog dialog) {
         dialog.setBackground(BACKGROUND_COLOR);
     }

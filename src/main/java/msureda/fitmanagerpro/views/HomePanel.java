@@ -1,25 +1,36 @@
 package msureda.fitmanagerpro.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import msureda.fitmanagerpro.dataaccess.DataAccess;
 import msureda.fitmanagerpro.Main;
 import msureda.fitmanagerpro.dto.User;
 import msureda.fitmanagerpro.utils.ErrorHandler;
 import msureda.fitmanagerpro.utils.StyleUtils;
+import msureda.workoutscalendarpanel.WorkoutsCalendarPanel;
+import msureda.workoutscalendarpanel.dto.Workout;
 
 /**
  * HomePage mostrada tras hacer el login
@@ -30,6 +41,11 @@ public class HomePanel extends javax.swing.JPanel {
     private JList<User> userList;
     private DefaultListModel<User> listModel;
     private ArrayList<User> users;
+    private WorkoutsCalendarPanel calendarPanel;
+    private JLabel statusBar;
+    private JTable statusTable;
+    private JScrollPane statusScrollPane;
+    private Timer fadeOutTimer;
 
     public HomePanel(Main main, User instructor) {
         initComponents();
@@ -105,6 +121,28 @@ public class HomePanel extends javax.swing.JPanel {
         bodyPanel.setLayout(new BorderLayout());
         bodyPanel.add(headerPanel, BorderLayout.NORTH);
         bodyPanel.add(userScrollPane, BorderLayout.CENTER);
+        
+        calendarPanel = new WorkoutsCalendarPanel();
+        calendarPanel.setConnectionString("jdbc:sqlserver://localhost;database=simulapdb;user=sa;password=Pwd1234;encrypt=false;");
+        calendarPanel.setInstructorId(instructor.getId());
+        calendarPanel.setActiveButtonColor(StyleUtils.PRIMARY_COLOR);
+        calendarPanel.setBackground(StyleUtils.BACKGROUND_COLOR);
+        calendarPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        calendarPanel.addCalendarEventListener(event -> updateStatusBar(event.getWorkouts()));
+        
+        statusBar = new JLabel("Selecciona un día para ver los workouts", SwingConstants.CENTER);
+        StyleUtils.styleLabel(statusBar);
+        statusBar.setOpaque(true);
+        statusBar.setBackground(StyleUtils.BACKGROUND_COLOR);
+        
+        JPanel calendarContainer = new JPanel(new BorderLayout());
+        calendarContainer.setBackground(StyleUtils.BACKGROUND_COLOR);
+        calendarContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        calendarContainer.add(calendarPanel, BorderLayout.CENTER);
+        calendarContainer.add(statusBar, BorderLayout.SOUTH);
+
+        // Agregar el calendario en la parte inferior del bodyPanel
+        bodyPanel.add(calendarContainer, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);
         add(bodyPanel, BorderLayout.CENTER);
@@ -147,6 +185,70 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 
+
+    private void updateStatusBar(ArrayList<Workout> workouts) {
+        if (statusScrollPane != null) {
+            remove(statusScrollPane);
+        }
+
+        if (workouts.isEmpty()) {
+            statusBar.setText("No hay workouts para este día");
+            return;
+        }
+
+        String[] columnNames = {"Usuario", "Comentario", "Ejercicios"};
+        Object[][] data = new Object[workouts.size()][3];
+
+        for (int i = 0; i < workouts.size(); i++) {
+            Workout workout = workouts.get(i);
+            data[i][0] = workout.getUser().getName();
+            data[i][1] = workout.getComments();
+            data[i][2] = workout.getExercises().size();
+        }
+
+        statusTable = new JTable(data, columnNames);
+        statusTable.setFillsViewportHeight(true);
+        statusTable.setPreferredScrollableViewportSize(new Dimension(getWidth(), 100));
+        StyleUtils.styleTable(statusTable);
+
+        statusScrollPane = new JScrollPane(statusTable);
+        statusScrollPane.setBackground(StyleUtils.BACKGROUND_COLOR);
+        statusScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        add(statusScrollPane, BorderLayout.SOUTH);
+        revalidate();
+        repaint();
+
+        startFadeOutAnimation(statusScrollPane);
+    }
+    
+    private void startFadeOutAnimation(JComponent component) {
+        if (fadeOutTimer != null && fadeOutTimer.isRunning()) {
+            fadeOutTimer.stop();
+        }
+
+        Timer fadeTimer = new Timer(50, new ActionListener() {
+            float opacity = 1.0f;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                opacity -= 0.05f;
+                component.setOpaque(false);
+                component.repaint();
+                if (opacity <= 0) {
+                    ((Timer) e.getSource()).stop();
+                    remove(component);
+                    revalidate();
+                    repaint();
+                }
+            }
+        });
+
+        fadeOutTimer = new Timer(10000, e -> fadeTimer.start());
+        fadeOutTimer.setRepeats(false);
+        fadeOutTimer.start();
+    }
+    
     // Render personalizado para la lista de usuarios
     private static class UserListCellRenderer extends JPanel implements ListCellRenderer<User> {
         private JLabel nameLabel;
