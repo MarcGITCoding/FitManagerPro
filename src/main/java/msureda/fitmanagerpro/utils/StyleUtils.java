@@ -36,7 +36,7 @@ public class StyleUtils {
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setBorder(buttonBorder);
-        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setFont(new Font("Roboto", Font.BOLD, 14));
         
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
@@ -62,23 +62,23 @@ public class StyleUtils {
     public static void styleLabel(JLabel label) {
         label.setPreferredSize(LABEL_SIZE);
         label.setForeground(TEXT_COLOR);
-        label.setFont(new Font("Arial", Font.PLAIN, 16));
+        label.setFont(new Font("Roboto", Font.PLAIN, 16));
     }
 
     public static void styleList(JList<?> list) {
         list.setPreferredSize(LIST_SIZE);
-        list.setFont(new Font("Arial", Font.PLAIN, 14));
+        list.setFont(new Font("Roboto", Font.PLAIN, 14));
         list.setForeground(TEXT_COLOR);
         list.setBackground(BACKGROUND_COLOR);
     }
 
     public static void styleTextField(JTextField textField) {
         textField.setPreferredSize(FIELD_SIZE);
-        textField.setFont(new Font("Arial", Font.PLAIN, 14));
+        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
     }
 
     public static void stylePasswordField(JPasswordField passwordField) {
         passwordField.setPreferredSize(FIELD_SIZE);
-        passwordField.setFont(new Font("Arial", Font.PLAIN, 14));
+        passwordField.setFont(new Font("Roboto", Font.PLAIN, 14));
     }
 }

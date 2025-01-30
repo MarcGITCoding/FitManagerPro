@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import msureda.fitmanagerpro.dto.User;
+import msureda.fitmanagerpro.utils.FontUtils;
 import msureda.fitmanagerpro.views.MainPanel;
 import msureda.fitmanagerpro.views.UserPanel;
 import msureda.fitmanagerpro.views.HomePanel;
@@ -22,6 +23,8 @@ public class Main extends javax.swing.JFrame {
     private JPanel currentPanel;
 
     public Main() {
+        FontUtils.loadRobotoFont();
+    
         initComponents();
         setSize(800, 800);
         setBackground(new Color(60,63,65));

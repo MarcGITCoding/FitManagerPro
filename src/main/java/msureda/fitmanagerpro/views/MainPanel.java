@@ -69,7 +69,7 @@ public class MainPanel extends javax.swing.JPanel {
                 }
             }
         });
-        add(linkLabel, "cell 0 4, alignx center, aligny center, w 153!, gapy 40");
+        add(linkLabel, "cell 0 4, alignx center, aligny center, w 145!, gapy 40");
 
         revalidate();
         repaint();

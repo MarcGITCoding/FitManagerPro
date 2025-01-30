@@ -50,7 +50,7 @@ public class UserPanel extends javax.swing.JPanel {
         // Flecha para regresar hacia atrás
         backLabel = new JLabel("←");
         StyleUtils.styleLabel(backLabel);
-        backLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        backLabel.setFont(new Font("Roboto", Font.BOLD, 24));
         backLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
