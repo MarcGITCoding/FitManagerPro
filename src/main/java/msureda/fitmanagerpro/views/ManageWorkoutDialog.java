@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -111,6 +112,18 @@ public class ManageWorkoutDialog extends JDialog {
             StyleUtils.styleButton(deleteButton, StyleUtils.ButtonStyle.DANGER);
             deleteButton.addActionListener(this::deleteWorkout);
         }
+
+        ImageIcon hourIcon = new ImageIcon(getClass().getResource("/icons/clock.png"));
+        ImageIcon dateIcon = new ImageIcon(getClass().getResource("/icons/date.png"));
+        ImageIcon commentIcon = new ImageIcon(getClass().getResource("/icons/comment.png"));
+        
+        hourIcon = new ImageIcon(hourIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        dateIcon = new ImageIcon(dateIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        commentIcon = new ImageIcon(commentIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        
+        hourLabel.setIcon(hourIcon);
+        dateLabel.setIcon(dateIcon);
+        commentsLabel.setIcon(commentIcon);
 
         // Estructuración de componentes
         StyleUtils.styleLabel(dateLabel);
