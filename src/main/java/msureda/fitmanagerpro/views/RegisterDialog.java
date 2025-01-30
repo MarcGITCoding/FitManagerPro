@@ -4,6 +4,7 @@ import javax.swing.*;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
@@ -34,6 +35,18 @@ public class RegisterDialog extends JDialog {
                 "[]10[]10[]10[]" // Filas con espacio entre ellas
         ));
         this.getContentPane().setBackground(StyleUtils.BACKGROUND_COLOR);
+        
+        ImageIcon nameIcon = new ImageIcon(getClass().getResource("/icons/username.png"));
+        ImageIcon emailIcon = new ImageIcon(getClass().getResource("/icons/email.png"));
+        ImageIcon passwordIcon = new ImageIcon(getClass().getResource("/icons/password.png"));
+
+        nameIcon = new ImageIcon(nameIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        emailIcon = new ImageIcon(emailIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        passwordIcon = new ImageIcon(passwordIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+
+        nameLabel.setIcon(nameIcon);
+        emailLabel.setIcon(emailIcon);
+        passwordLabel.setIcon(passwordIcon);
 
         StyleUtils.styleLabel(nameLabel);
         StyleUtils.styleLabel(emailLabel);

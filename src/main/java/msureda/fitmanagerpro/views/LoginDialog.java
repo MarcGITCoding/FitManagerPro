@@ -2,6 +2,7 @@ package msureda.fitmanagerpro.views;
 
 import javax.swing.*;
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 import msureda.fitmanagerpro.Main;
@@ -32,6 +33,15 @@ public class LoginDialog extends JDialog {
         ));
         this.getContentPane().setBackground(StyleUtils.BACKGROUND_COLOR);
 
+        ImageIcon emailIcon = new ImageIcon(getClass().getResource("/icons/email.png"));
+        ImageIcon passwordIcon = new ImageIcon(getClass().getResource("/icons/password.png"));
+        
+        emailIcon = new ImageIcon(emailIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        passwordIcon = new ImageIcon(passwordIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        
+        emailLabel.setIcon(emailIcon);
+        passwordLabel.setIcon(passwordIcon);
+        
         StyleUtils.styleLabel(emailLabel);
         StyleUtils.styleLabel(passwordLabel);
         StyleUtils.styleTextField(emailField);
