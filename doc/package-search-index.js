@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"msureda.fitmanagerpro"},{"l":"msureda.fitmanagerpro.dataaccess"},{"l":"msureda.fitmanagerpro.dto"},{"l":"msureda.fitmanagerpro.utils"},{"l":"msureda.fitmanagerpro.views"}];updateSearchResults();
