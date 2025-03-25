@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * Clase DTO para la tabla Workouts
+ * Clase DTO que representa un entrenamiento en la tabla Workouts.
+ * Contiene información sobre el identificador, la fecha del entrenamiento, el usuario que lo realizó, comentarios y la lista de ejercicios.
+ * 
  * @author Marc Sureda
  */
 public class Workout {
@@ -13,72 +15,82 @@ public class Workout {
     private int UserId;
     private String Comments;
     private ArrayList<Exercise> Exercises;
-    
+
     /**
-     * @return the Id
+     * Obtiene el identificador del entrenamiento.
+     * @return el Id del entrenamiento.
      */
     public int getId() {
         return Id;
     }
 
     /**
-     * @param Id the Id to set
+     * Establece el identificador del entrenamiento.
+     * @param Id el Id a asignar.
      */
     public void setId(int Id) {
         this.Id = Id;
     }
 
     /**
-     * @return the ForDate
+     * Obtiene la fecha del entrenamiento.
+     * @return la fecha del entrenamiento.
      */
     public Date getForDate() {
         return ForDate;
     }
 
     /**
-     * @param ForDate the ForDate to set
+     * Establece la fecha del entrenamiento.
+     * @param ForDate la fecha a asignar.
      */
     public void setForDate(Date ForDate) {
         this.ForDate = ForDate;
     }
 
     /**
-     * @return the UserId
+     * Obtiene el identificador del usuario que realizó el entrenamiento.
+     * @return el Id del usuario.
      */
     public int getUserId() {
         return UserId;
     }
 
     /**
-     * @param UserId the UserId to set
+     * Establece el identificador del usuario que realizó el entrenamiento.
+     * @param UserId el Id del usuario a asignar.
      */
     public void setUserId(int UserId) {
         this.UserId = UserId;
     }
 
     /**
-     * @return the Comments
+     * Obtiene los comentarios del entrenamiento.
+     * @return los comentarios del entrenamiento.
      */
     public String getComments() {
         return Comments;
     }
 
     /**
-     * @param Comments the Comments to set
+     * Establece los comentarios del entrenamiento.
+     * @param Comments los comentarios a asignar.
      */
     public void setComments(String Comments) {
         this.Comments = Comments;
     }
 
     /**
-     * @return the Exercises
+     * Obtiene la lista de ejercicios del entrenamiento.
+     * @return una lista de ejercicios.
      */
     public ArrayList<Exercise> getExercises() {
         return Exercises;
     }
 
     /**
-     * @param Exercises the Exercises to set
+     * Establece la lista de ejercicios del entrenamiento.
+     * @param Exercises la lista de ejercicios a asignar.
      */
     public void setExercises(ArrayList<Exercise> Exercises) {
         this.Exercises = Exercises;

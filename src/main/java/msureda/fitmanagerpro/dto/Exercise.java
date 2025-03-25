@@ -1,7 +1,9 @@
 package msureda.fitmanagerpro.dto;
 
 /**
- * Clase DTO para la tabla Exercisis
+ * Clase DTO que representa un ejercicio de la tabla Exercisis.
+ * Contiene información sobre el identificador, nombre, descripción y una foto de demostración.
+ * 
  * @author Marc Sureda
  */
 public class Exercise {
@@ -16,56 +18,64 @@ public class Exercise {
     }
 
     /**
-     * @return the Id
+     * Obtiene el identificador del ejercicio.
+     * @return el Id del ejercicio.
      */
     public int getId() {
         return Id;
     }
 
     /**
-     * @param Id the Id to set
+     * Establece el identificador del ejercicio.
+     * @param Id el Id a asignar.
      */
     public void setId(int Id) {
         this.Id = Id;
     }
 
     /**
-     * @return the Name
+     * Obtiene el nombre del ejercicio.
+     * @return el nombre del ejercicio.
      */
     public String getName() {
         return Name;
     }
 
     /**
-     * @param Name the Name to set
+     * Establece el nombre del ejercicio.
+     * @param Name el nombre a asignar.
      */
     public void setName(String Name) {
         this.Name = Name;
     }
 
     /**
-     * @return the Description
+     * Obtiene la descripción del ejercicio.
+     * @return la descripción del ejercicio.
      */
     public String getDescription() {
         return Description;
     }
 
     /**
-     * @param Description the Description to set
+     * Establece la descripción del ejercicio.
+     * @param Description la descripción a asignar.
      */
     public void setDescription(String Description) {
         this.Description = Description;
     }
 
     /**
-     * @return the DemoPhoto
+     * Obtiene la foto de demostración del ejercicio.
+     * @return la foto de demostración del ejercicio.
      */
     public String getDemoPhoto() {
         return DemoPhoto;
     }
 
     /**
-     * @param DemoPhoto the DemoPhoto to set
+     * Establece la foto de demostración del ejercicio.
+     * @param DemoPhoto la foto a asignar.
      */
     public void setDemoPhoto(String DemoPhoto) {
         this.DemoPhoto = DemoPhoto;
