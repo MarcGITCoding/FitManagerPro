@@ -13,11 +13,21 @@ import msureda.fitmanagerpro.dto.Exercise;
 import msureda.fitmanagerpro.dto.Workout;
 
 /**
- * Clase para la comunicación con la DB
+ * Clase que gestiona el acceso a la base de datos.
+ * Permite realizar operaciones CRUD sobre usuarios, entrenamientos y ejercicios.
+ * 
+ * Conexión a la base de datos mediante JDBC.
+ * 
  * @author Marc Sureda
  */
 public class DataAccess {
 
+    /**
+     * Establece una conexión con la base de datos.
+     * 
+     * @return una conexión a la base de datos.
+     * @throws SQLException si hay un error al conectarse.
+     */
     private static Connection getConnection() throws SQLException {
         Connection connection = null;
 
@@ -32,6 +42,13 @@ public class DataAccess {
         return connection;
     }
 
+    /**
+     * Obtiene un instructor por su correo electrónico.
+     * 
+     * @param email el correo del instructor.
+     * @return el usuario instructor si existe, de lo contrario null.
+     * @throws SQLException si hay un error en la consulta.
+     */
     public static User getInstructorByEmail(String email) throws SQLException {
         String sql = "SELECT * FROM Usuaris WHERE Email = ? AND Instructor = 1";
         try (Connection conn = getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -50,6 +67,13 @@ public class DataAccess {
         return null;
     }
 
+    /**
+     * Obtiene una lista de usuarios asignados a un instructor.
+     * 
+     * @param instructorId el identificador del instructor.
+     * @return una lista de usuarios.
+     * @throws SQLException si hay un error en la consulta.
+     */
     public static ArrayList<User> getUsersByInstructor(int instructorId) throws SQLException {
         ArrayList<User> users = new ArrayList<>();
         String sql = "SELECT * FROM Usuaris WHERE AssignedInstructor = ?";
@@ -71,6 +95,12 @@ public class DataAccess {
         return users;
     }
     
+    /**
+     * Guarda un nuevo usuario en la base de datos.
+     * 
+     * @param user el usuario a guardar.
+     * @throws SQLException si hay un error en la operación.
+     */
     public static void saveUser(User user) throws SQLException {
         String sql = "INSERT INTO Usuaris (Nom, Email, PasswordHash, Instructor) VALUES (?, ?, ?, ?)";
 
@@ -92,6 +122,13 @@ public class DataAccess {
         }
     }
 
+    /**
+     * Obtiene una lista de entrenamientos de un usuario.
+     *
+     * @param user el usuario cuyos entrenamientos se desean obtener.
+     * @return una lista de entrenamientos.
+     * @throws SQLException si ocurre un error en la consulta.
+     */
     public static ArrayList<Workout> getWorkoutsByUser(User user) throws SQLException {
         ArrayList<Workout> workouts = new ArrayList<>();
         String sql = "SELECT Workouts.Id, Workouts.ForDate, Workouts.UserId, Workouts.Comments"
@@ -120,6 +157,13 @@ public class DataAccess {
 
     }
 
+    /**
+     * Obtiene los ejercicios de un entrenamiento.
+     *
+     * @param workout el entrenamiento cuyos ejercicios se desean obtener.
+     * @return una lista de ejercicios.
+     * @throws SQLException si ocurre un error en la consulta.
+     */
     public static ArrayList<Exercise> getExercisesByWorkout(Workout workout) throws SQLException {
         ArrayList<Exercise> exercises = new ArrayList<>();
         String sql = "SELECT ExercicisWorkouts.IdExercici,"
@@ -144,6 +188,12 @@ public class DataAccess {
         return exercises;
     }
 
+    /**
+     * Obtiene todos los ejercicios disponibles en la base de datos.
+     *
+     * @return una lista de ejercicios.
+     * @throws SQLException si ocurre un error en la consulta.
+     */
     public static ArrayList<Exercise> getAllExercises() throws SQLException {
         ArrayList<Exercise> exercises = new ArrayList<>();
         String sql = "SELECT Id, Exercicis.NomExercici, Exercicis.Descripcio, Exercicis.DemoFoto"
@@ -166,6 +216,15 @@ public class DataAccess {
         return exercises;
     }
 
+    /**
+     * Guarda un nuevo entrenamiento en la base de datos junto con los ejercicios seleccionados.
+     *
+     * @param date              La fecha del entrenamiento.
+     * @param userId            El ID del usuario al que pertenece el entrenamiento.
+     * @param comments          Comentarios opcionales sobre el entrenamiento.
+     * @param selectedExercises Lista de ejercicios asociados al entrenamiento.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public static void saveWorkout(Date date, int userId, String comments, ArrayList<Exercise> selectedExercises) throws SQLException {
         String sql = "INSERT INTO Workouts (ForDate, UserId, Comments) VALUES (?, ?, ?)";
 
@@ -200,7 +259,16 @@ public class DataAccess {
             }
         }
     }
-
+    
+    /**
+     * Actualiza un entrenamiento existente en la base de datos y reemplaza los ejercicios asociados.
+     *
+     * @param workoutId         El ID del entrenamiento a actualizar.
+     * @param date              La nueva fecha del entrenamiento.
+     * @param comments          Los nuevos comentarios sobre el entrenamiento.
+     * @param selectedExercises La nueva lista de ejercicios asociados al entrenamiento.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public static void updateWorkout(int workoutId, Date date, String comments, ArrayList<Exercise> selectedExercises) throws SQLException {
         String sql = "UPDATE Workouts SET ForDate = ?, Comments = ? WHERE Id = ?";
 
@@ -237,6 +305,12 @@ public class DataAccess {
         }
     }
 
+    /**
+     * Elimina un entrenamiento de la base de datos junto con sus ejercicios asociados.
+     *
+     * @param workoutId El ID del entrenamiento a eliminar.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public static void deleteWorkout(int workoutId) throws SQLException {
         String sql = "DELETE FROM ExercicisWorkouts WHERE IdWorkout = ?";
 
