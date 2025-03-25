@@ -5,15 +5,21 @@ import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
 /**
- * Clase para el manejo de errores
+ * Clase para el manejo y presentación de errores SQL mediante mensajes personalizados.
+ * 
  * @author Marc Sureda
  */
-
 public class ErrorHandler {
-    public static void showSQLError (SQLException e, Component parent) {
+    /**
+     * Muestra un mensaje de error personalizado en función del código de error SQL.
+     * 
+     * @param error El objeto SQLException que contiene la información del error.
+     * @param parent El componente principal de la interfaz de usuario que se usará para mostrar el mensaje de error.
+     */
+    public static void showSQLError (SQLException error, Component parent) {
         String errorMessage;
 
-        switch (e.getErrorCode()) {
+        switch (error.getErrorCode()) {
             case 1045:
                 errorMessage = "Acceso denegado en la base de datos: Usuario o contraseña incorrectos.";
                 break;
@@ -54,7 +60,7 @@ public class ErrorHandler {
                 errorMessage = "Conexión perdida con el servidor MySQL durante la consulta. Intente nuevamente.";
                 break;
             default:
-                errorMessage = "Error desconocido: " + e.getMessage();
+                errorMessage = "Error desconocido: " + error.getMessage();
                 break;
         }
 
@@ -62,6 +68,12 @@ public class ErrorHandler {
         //e.printStackTrace();
     }
     
+    /**
+     * Muestra un mensaje de error personalizado.
+     * 
+     * @param message El mensaje de error a mostrar.
+     * @param parent El componente principal de la interfaz de usuario que se usará para mostrar el mensaje de error.
+     */
     public static void showCustomError (String message, Component parent) {
         JOptionPane.showMessageDialog(parent, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
