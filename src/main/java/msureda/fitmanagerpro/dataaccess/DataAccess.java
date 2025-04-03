@@ -30,14 +30,8 @@ public class DataAccess {
      */
     private static Connection getConnection() throws SQLException {
         Connection connection = null;
-
-        //OLD LOCAL DB STRING
-        //String connectionString = "jdbc:sqlserver://localhost;database=simulapdb;user=sa;"
-        //        + "password=Pwd1234;encrypt=false;";
-        String connectionString = "jdbc:sqlserver://simulapsqlserver.database.windows.net:1433;database=simulapdb25;user=simulapdbadmin@simulapsqlserver;"
-                + "password=Pwd1234.;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30";
-
-        connection = DriverManager.getConnection(connectionString);
+        
+        connection = DriverManager.getConnection(DatabaseConfig.CONNECTION_STRING);
 
         return connection;
     }

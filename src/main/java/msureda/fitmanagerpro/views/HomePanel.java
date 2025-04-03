@@ -1,7 +1,6 @@
 package msureda.fitmanagerpro.views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
@@ -26,6 +24,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import msureda.fitmanagerpro.dataaccess.DataAccess;
 import msureda.fitmanagerpro.Main;
+import msureda.fitmanagerpro.dataaccess.DatabaseConfig;
 import msureda.fitmanagerpro.dto.User;
 import msureda.fitmanagerpro.utils.ErrorHandler;
 import msureda.fitmanagerpro.utils.StyleUtils;
@@ -123,7 +122,7 @@ public class HomePanel extends javax.swing.JPanel {
         bodyPanel.add(userScrollPane, BorderLayout.CENTER);
         
         calendarPanel = new WorkoutsCalendarPanel();
-        calendarPanel.setConnectionString("jdbc:sqlserver://localhost;database=simulapdb;user=sa;password=Pwd1234;encrypt=false;");
+        calendarPanel.setConnectionString(DatabaseConfig.CONNECTION_STRING);
         calendarPanel.setInstructorId(instructor.getId());
         calendarPanel.setActiveButtonColor(StyleUtils.PRIMARY_COLOR);
         calendarPanel.setBackground(StyleUtils.BACKGROUND_COLOR);
