@@ -14,12 +14,20 @@ import msureda.fitmanagerpro.utils.StyleUtils;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Diálogo modal para el login
+ * Diálogo modal para el login de usuarios en la aplicación.
+ * Permite a los usuarios ingresar su correo y contraseña para autenticarse.
+ * 
  * @author Marc Sureda
  */
 public class LoginDialog extends JDialog {
     private User authenticatedInstructor = null;
 
+    /**
+     * Crea un nuevo diálogo de login.
+     * 
+     * @param parent El {@code JFrame} padre del diálogo.
+     * @param mainFrame La instancia principal de la aplicación.
+     */
     public LoginDialog(JFrame parent, Main mainFrame) {
         super(mainFrame, "Login", true);
         initComponents();
@@ -104,6 +112,12 @@ public class LoginDialog extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método ejecutado cuando el usuario hace clic en el botón de login.
+     * Se valida el email y la contraseña ingresados, y se autentica el usuario.
+     * 
+     * @param evt Evento de acción generado por el botón de login.
+     */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String email = emailField.getText();
         char[] password = passwordField.getPassword();
@@ -142,6 +156,11 @@ public class LoginDialog extends JDialog {
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    /**
+     * Retorna el usuario autenticado después del login.
+     * 
+     * @return El usuario autenticado, o {@code null} si no se autenticó correctamente.
+     */
     public User getAuthenticatedInstructor() {
         return authenticatedInstructor;
     }

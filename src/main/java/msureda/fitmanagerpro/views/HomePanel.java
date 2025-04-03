@@ -32,7 +32,11 @@ import msureda.workoutscalendarpanel.WorkoutsCalendarPanel;
 import msureda.workoutscalendarpanel.dto.Workout;
 
 /**
- * HomePage mostrada tras hacer el login
+ * Panel principal de inicio que se muestra tras realizar el login de un instructor.
+ * Esta clase muestra un saludo al instructor, una lista de usuarios asociados a él,
+ * y un calendario con los entrenamientos de los usuarios. Además, permite al instructor
+ * navegar a los paneles de usuario y gestionar los entrenamientos.
+ * 
  * @author Marc Sureda
  */
 public class HomePanel extends javax.swing.JPanel {
@@ -46,6 +50,12 @@ public class HomePanel extends javax.swing.JPanel {
     private JScrollPane statusScrollPane;
     private Timer fadeOutTimer;
 
+    /**
+     * Constructor que inicializa el panel de inicio con la información del instructor.
+     * 
+     * @param main El objeto principal de la aplicación.
+     * @param instructor El instructor que ha iniciado sesión.
+     */
     public HomePanel(Main main, User instructor) {
         initComponents();
         
@@ -172,6 +182,11 @@ public class HomePanel extends javax.swing.JPanel {
         logoutButton.setBounds(570, 10, 72, 23);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de clic en el botón de logout.
+     * 
+     * @param evt El evento de acción generado por el clic en el botón.
+     */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // En logout, volver a cargar la aplicación desde el main
         SwingUtilities.getWindowAncestor(HomePanel.this).dispose();
@@ -184,7 +199,11 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 
-
+    /**
+     * Actualiza la barra de estado con los entrenamientos para el día seleccionado.
+     * 
+     * @param workouts La lista de entrenamientos para el día.
+     */
     private void updateStatusBar(ArrayList<Workout> workouts) {
         if (statusScrollPane != null) {
             remove(statusScrollPane);
@@ -221,6 +240,11 @@ public class HomePanel extends javax.swing.JPanel {
         startFadeOutAnimation(statusScrollPane);
     }
     
+    /**
+     * Inicia una animación de desvanecimiento para el componente dado.
+     * 
+     * @param component El componente al que se le aplicará el desvanecimiento.
+     */
     private void startFadeOutAnimation(JComponent component) {
         if (fadeOutTimer != null && fadeOutTimer.isRunning()) {
             fadeOutTimer.stop();
@@ -248,7 +272,10 @@ public class HomePanel extends javax.swing.JPanel {
         fadeOutTimer.start();
     }
     
-    // Render personalizado para la lista de usuarios
+    /**
+     * Renderizador personalizado para la lista de usuarios.
+     * Muestra el nombre y el correo electrónico del usuario en una fila de la lista.
+     */
     private static class UserListCellRenderer extends JPanel implements ListCellRenderer<User> {
         private JLabel nameLabel;
         private JLabel emailLabel;

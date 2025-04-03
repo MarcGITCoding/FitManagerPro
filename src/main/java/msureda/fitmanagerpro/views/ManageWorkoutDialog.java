@@ -2,10 +2,7 @@ package msureda.fitmanagerpro.views;
 
 import javax.swing.*;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,7 +25,10 @@ import msureda.fitmanagerpro.utils.StyleUtils;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Diálogo modal para la gestión de workouts (añadir, editar o eliminar)
+ * Diálogo modal para la gestión de workouts (añadir, editar o eliminar).
+ * Permite al usuario gestionar los detalles de un entrenamiento, como la fecha, hora, comentarios y ejercicios asociados.
+ * Se utiliza tanto para crear nuevos workouts como para editar o eliminar los existentes.
+ * 
  * @author Marc Sureda
  */
 public class ManageWorkoutDialog extends JDialog {
@@ -42,6 +42,14 @@ public class ManageWorkoutDialog extends JDialog {
     private JButton saveButton;
     private JButton deleteButton;
 
+    /**
+     * Constructor que inicializa el diálogo con los parámetros necesarios.
+     * 
+     * @param parent Ventana principal que invoca el diálogo.
+     * @param main Instancia principal de la aplicación.
+     * @param workout El workout a editar o null si se desea crear un nuevo workout.
+     * @param user El usuario asociado al workout.
+     */
     public ManageWorkoutDialog(JFrame parent, Main main, Workout workout, User user) {
         super(parent, workout == null ? "Crear Workout" : "Editar Workout", true);
         this.main = main;
@@ -186,6 +194,9 @@ public class ManageWorkoutDialog extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Establece los datos del workout si está en modo edición.
+     */
     private void setCurrentData() {
         // Configurar la fecha y hora
         dateSpinner.setValue(workout.getForDate());
@@ -211,7 +222,12 @@ public class ManageWorkoutDialog extends JDialog {
         exerciseList.setSelectedIndices(indices);
     }
 
-    // Guardar o actualizar workout
+    /**
+     * Guarda o actualiza el workout con los datos introducidos.
+     * Muestra una confirmación antes de proceder con la acción.
+     * 
+     * @param ev El evento que dispara el guardado o actualización del workout.
+     */
     private void saveWorkout(ActionEvent ev) {
         int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea guardar los cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
@@ -243,7 +259,12 @@ public class ManageWorkoutDialog extends JDialog {
         dispose();
     }
 
-    // Eliminar workout
+    /**
+     * Elimina el workout actual.
+     * Muestra una confirmación antes de proceder con la eliminación.
+     * 
+     * @param ev El evento que dispara la eliminación del workout.
+     */
     private void deleteWorkout(ActionEvent ev) {
         int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea eliminar este workout?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;

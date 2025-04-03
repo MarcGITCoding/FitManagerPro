@@ -16,12 +16,21 @@ import msureda.fitmanagerpro.views.LoginDialog;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Panel prinicpal de la aplicación
+ * Panel principal de la aplicación, que sirve como pantalla de inicio.
+ * Muestra el logo, el título de la aplicación y los botones de acceso y registro.
+ * También incluye un enlace a la página web oficial.
+ * 
  * @author Marc Sureda
  */
 public class MainPanel extends javax.swing.JPanel {
     private Main main = null;
 
+    /**
+     * Constructor de MainPanel.
+     * Configura el panel, aplica estilos y añade los componentes principales.
+     * 
+     * @param mainJFrame Referencia al JFrame principal de la aplicación.
+     */
     public MainPanel(Main mainJFrame) {
         initComponents();
         main = mainJFrame;
@@ -120,6 +129,13 @@ public class MainPanel extends javax.swing.JPanel {
         logoLabel.setBounds(0, -10, 290, 260);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja la acción del botón "Acceder".
+     * Abre el cuadro de diálogo de inicio de sesión y, si el usuario se autentica,
+     * actualiza el instructor en la aplicación y muestra el panel de inicio.
+     * 
+     * @param evt Evento de acción del botón.
+     */
     private void loginAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAccessButtonActionPerformed
         LoginDialog loginDialog = new LoginDialog(main, main);
         loginDialog.setLocationRelativeTo(main);
@@ -132,6 +148,13 @@ public class MainPanel extends javax.swing.JPanel {
         main.showHomePanel();
     }//GEN-LAST:event_loginAccessButtonActionPerformed
 
+    /**
+     * Maneja la acción del botón "Registrarse".
+     * Abre el cuadro de diálogo de registro y, si el usuario se registra correctamente,
+     * actualiza el instructor en la aplicación y muestra el panel de inicio.
+     * 
+     * @param evt Evento de acción del botón.
+     */
     private void registerAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAccessButtonActionPerformed
         RegisterDialog registerDialog = new RegisterDialog(main, main);
         registerDialog.setLocationRelativeTo(main);

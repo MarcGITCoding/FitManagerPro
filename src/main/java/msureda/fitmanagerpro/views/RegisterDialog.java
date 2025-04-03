@@ -17,12 +17,21 @@ import msureda.fitmanagerpro.utils.StyleUtils;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Diálogo modal para el register
+ * Diálogo modal para el registro de nuevos usuarios en la aplicación.
+ * Permite a los usuarios ingresar su nombre, correo electrónico y contraseña
+ * para crear una cuenta en el sistema.
+ * 
  * @author Marc Sureda
  */
 public class RegisterDialog extends JDialog {
     private User registeredUser = null;
 
+    /**
+     * Crea un nuevo diálogo de registro.
+     * 
+     * @param parent     El {@code JFrame} padre del diálogo.
+     * @param mainFrame  La instancia principal de la aplicación.
+     */
     public RegisterDialog(JFrame parent, Main mainFrame) {
         super(mainFrame, "Register", true);
         initComponents();
@@ -123,6 +132,12 @@ public class RegisterDialog extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método ejecutado cuando el usuario hace clic en el botón de registro.
+     * Se validan los datos ingresados y, si son correctos, se almacena el nuevo usuario.
+     * 
+     * @param evt Evento de acción generado por el botón de registro.
+     */
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         String name = nameField.getText();
         String email = emailField.getText();
@@ -172,6 +187,11 @@ public class RegisterDialog extends JDialog {
         }
     }//GEN-LAST:event_registerButtonActionPerformed
 
+    /**
+     * Retorna el usuario registrado después del proceso de registro.
+     * 
+     * @return El usuario registrado, o {@code null} si el registro falló.
+     */
     public User getRegisteredUser() {
         return registeredUser;
     }

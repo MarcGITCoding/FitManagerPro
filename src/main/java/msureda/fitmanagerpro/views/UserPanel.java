@@ -25,7 +25,9 @@ import msureda.fitmanagerpro.utils.ErrorHandler;
 import msureda.fitmanagerpro.utils.StyleUtils;
 
 /**
- * Panel de usuario con su listado de entrenamientos
+ * Panel de usuario que muestra la lista de entrenamientos asociados.
+ * Permite gestionar entrenamientos y visualizar los existentes.
+ * 
  * @author Marc Sureda
  */
 public class UserPanel extends javax.swing.JPanel {
@@ -37,6 +39,12 @@ public class UserPanel extends javax.swing.JPanel {
     private DefaultListModel<Workout> listModel;
     private ArrayList<Workout> workouts;
 
+    /**
+     * Crea un nuevo `UserPanel` para un usuario específico.
+     * 
+     * @param main Referencia al marco principal de la aplicación.
+     * @param user Usuario cuyos entrenamientos se mostrarán.
+     */
     public UserPanel(Main main, User user) {
         initComponents();
         
@@ -144,7 +152,9 @@ public class UserPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    
+    /**
+     * Refresca la lista de entrenamientos del usuario desde la base de datos.
+     */
     private void refreshWorkoutList() {
         try {
             workouts = DataAccess.getWorkoutsByUser(user);
@@ -158,8 +168,11 @@ public class UserPanel extends javax.swing.JPanel {
         }
     }
     
-    
-    // Acción para abrir el diálogo de añadir workout
+    /**
+     * Acción para abrir el diálogo de creación de un nuevo entrenamiento.
+     * 
+     * @param e Evento de acción del botón.
+     */
     private void addWorkoutAction(ActionEvent e) {
         ManageWorkoutDialog manageWorkoutDialog = new ManageWorkoutDialog(main, main, null, user);
         manageWorkoutDialog.setLocationRelativeTo(main);
@@ -169,7 +182,10 @@ public class UserPanel extends javax.swing.JPanel {
         refreshWorkoutList();
     }
 
-    // Render personalizado para la lista de workouts
+    /**
+     * Renderizador personalizado para la lista de entrenamientos.
+     * Muestra la fecha y el comentario de cada entrenamiento en la lista.
+     */
     private static class WorkoutListCellRenderer extends JPanel implements ListCellRenderer<Workout> {
         private JLabel dateLabel;
         private JLabel commentLabel;
