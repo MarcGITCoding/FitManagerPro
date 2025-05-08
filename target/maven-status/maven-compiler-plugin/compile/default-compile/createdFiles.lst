@@ -11,6 +11,7 @@ msureda\fitmanagerpro\views\HomePanel$2.class
 msureda\fitmanagerpro\dto\User.class
 msureda\fitmanagerpro\utils\StyleUtils$1.class
 msureda\fitmanagerpro\views\ManageWorkoutDialog.class
+msureda\fitmanagerpro\Main$5.class
 msureda\fitmanagerpro\utils\ErrorHandler.class
 msureda\fitmanagerpro\utils\StyleUtils$ButtonStyle.class
 msureda\fitmanagerpro\views\LoginDialog$1.class
@@ -30,5 +31,6 @@ msureda\fitmanagerpro\views\ManageWorkoutDialog$1.class
 msureda\fitmanagerpro\views\UserPanel$2.class
 msureda\fitmanagerpro\views\HomePanel.class
 msureda\fitmanagerpro\dataaccess\DataAccess.class
+msureda\fitmanagerpro\Main$6.class
 msureda\fitmanagerpro\Main.class
 msureda\fitmanagerpro\Main$1.class
