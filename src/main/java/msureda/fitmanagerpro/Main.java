@@ -1,8 +1,11 @@
 package msureda.fitmanagerpro;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -105,6 +108,68 @@ public class Main extends javax.swing.JFrame {
 
         // Menú "Help"
         JMenu helpMenu = new JMenu("Help");
+    
+        // API Docs
+        JMenuItem apiDocsMenuItem = new JMenuItem("API Docs");
+        apiDocsMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String docsPath = System.getenv("LOCALAPPDATA") + "\\fitmanagerpro\\docs\\index.html";
+                    File htmlFile = new File(docsPath);
+                    if (htmlFile.exists()) {
+                        Desktop.getDesktop().browse(htmlFile.toURI());
+                    } else {
+                        JOptionPane.showMessageDialog(
+                            Main.this,
+                            "No tienes los API Docs instalados",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(
+                        Main.this,
+                        "Error al abrir la documentación: " + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+        });
+        helpMenu.add(apiDocsMenuItem);
+
+        // User Manual
+        JMenuItem userManualMenuItem = new JMenuItem("User Manual");
+        userManualMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String manualPath = System.getenv("LOCALAPPDATA") + "\\fitmanagerpro\\Manual de usuario.pdf";
+                    File pdfFile = new File(manualPath);
+                    if (pdfFile.exists()) {
+                        Desktop.getDesktop().open(pdfFile);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                            Main.this,
+                            "No tienes el User Manual instalado",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(
+                        Main.this,
+                        "Error al abrir el manual de usuario: " + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+        });
+        helpMenu.add(userManualMenuItem);
+
+        // About
         JMenuItem aboutMenuItem = new JMenuItem("About");
         aboutMenuItem.addActionListener(new ActionListener() {
             @Override
